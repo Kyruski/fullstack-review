@@ -1,9 +1,21 @@
 const express = require('express');
 let app = express();
+const bodyParser = require('body-parser');
+const github = require('../helpers/github.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
+app.use(bodyParser.json());
 
 app.post('/repos', function (req, res) {
+  const username = req.body.username;
+  github.getReposByUsername(username, (err, data) => {
+    if (err) {
+      res.send('error getting repos ' + err);
+    } else {
+      console.log('success getting data');
+      res.json(data);
+    }
+  });
   // TODO - your code here!
   // This route should take the github username provided
   // and get the repo information from the github API, then
@@ -11,6 +23,7 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
+
   // TODO - your code here!
   // This route should send back the top 25 repos
 });

@@ -2,6 +2,7 @@ const request = require('request');
 const config = require('../config.js');
 
 const formatRepo = (item) => {
+  console.log('this is item', item);
   const repoInfo = {
     repoName: item.full_name,
     repoInfo: {
@@ -9,7 +10,7 @@ const formatRepo = (item) => {
       author_avatar: item.owner.avatar_url,
       url: item.html_url,
       stars: item.stargazers_count,
-      forks: forks_count
+      forks: item.forks_count
     }
   };
   return repoInfo;
@@ -43,11 +44,11 @@ let getReposByUsername = (username, callback) => {
     if (err) {
       callback(err);
     } else {
-      const repos = formatResponseData(body);
+      const data = JSON.parse(body)
+      const repos = formatResponseData(data);
       callback(null, repos);
     }
-  }); //(err, res, body) => {}
-
+});
 }
 
 module.exports.getReposByUsername = getReposByUsername;
