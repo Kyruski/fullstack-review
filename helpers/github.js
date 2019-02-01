@@ -2,19 +2,17 @@ const request = require('request');
 const config = require('../config.js');
 
 const formatRepo = (item) => {
-  console.log('this is item', item);
   const repoInfo = {
-    repoName: item.full_name,
-    repoInfo: {
-      author: item.owner.login,
-      author_avatar: item.owner.avatar_url,
-      url: item.html_url,
-      stars: item.stargazers_count,
-      forks: item.forks_count
-    }
+    _id: item.id,
+    repo: item.name,
+    author: item.owner.login,
+    author_avatar: item.owner.avatar_url,
+    url: item.html_url,
+    stars: item.stargazers_count,
+    forks: item.forks_count
   };
   return repoInfo;
-}
+};
 
 const formatResponseData = (data) => {
   let repos = [];
