@@ -3,7 +3,7 @@ import RepoListEntry from './RepoListEntry.jsx';
 
 const RepoList = (props) => (
   <div>
-    <h4> Top 25 Repos by Forks </h4>
+    <h4> Top 25 Repos of Users in the Database by Number of Forks </h4>
     <table>
       <tbody>
         {props.repos.map((repo, index) => {
