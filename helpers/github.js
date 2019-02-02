@@ -16,6 +16,7 @@ const formatRepo = (item) => {
 
 const formatResponseData = (data) => {
   let repos = [];
+  if (data.message === 'Not Found') return null;
   for (let item of data) {
     let repoObj = formatRepo(item);
     repos.push(repoObj);
@@ -39,7 +40,11 @@ let getReposByUsername = (username, callback) => {
     } else {
       const data = JSON.parse(body)
       const repos = formatResponseData(data);
-      callback(null, repos);
+      if (repos) {
+        callback(null, repos);
+      } else {
+        callback('The server was unable to get the user\'s repos');
+      }
     }
 });
 }

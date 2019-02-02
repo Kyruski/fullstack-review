@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const github = require('../helpers/github.js');
 const model = require('./model.js');
 
-const requestGithub = (user, callback) => {
+const requestGithub = (user, res, callback) => {
   github.getReposByUsername(user, (err, data) => {
     if (err) {
-      res.send('error getting repos ' + err);
+      res.send(err);
     } else {
       const insertCallback = (err, response, repoArray) => {
         let newData = repoArray.slice(1);
@@ -32,11 +32,11 @@ app.use(bodyParser.json());
 app.post('/repos', function (req, res) {
   console.log(req.body);
   const username = req.body.username;
-  requestGithub(username, (err, response) => {
+  requestGithub(username, res, (err, response) => {
     if (err) {
       callback(err);
     } else {
-      res.send('Success');
+      res.send('The user\'s repos have been successfully added');
     }
   });
 });

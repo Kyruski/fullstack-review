@@ -8,25 +8,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      repos: []
+      repos: [],
+      message: ''
     }
 
   }
 
-  search(term) {
-    console.log(`${term} was searched`);
-    const payload = JSON.stringify({ username: term });
-    $.ajax({
-      url: '/repos',
-      type: 'POST',
-      data: payload,
-      contentType: "application/json; charset=utf-8",
-      success: (data) => (console.log('success')),
-      error: () => (console.log('Something Went wrong'))
-    })
-  }
-
-  componentDidMount() {
+  getData() {
     $.ajax({
       url: '/repos',
       type: 'GET',
@@ -39,11 +27,34 @@ class App extends React.Component {
     })
   }
 
+  search(term) {
+    console.log(`${term} was searched`);
+    const payload = JSON.stringify({ username: term });
+    $.ajax({
+      url: '/repos',
+      type: 'POST',
+      data: payload,
+      contentType: "application/json; charset=utf-8",
+      success: (data) => {
+        this.setState({
+          message: data
+        }, () => {
+          this.getData()
+        });
+      },
+      error: () => (console.log('Something Went wrong'))
+    })
+  }
+
+  componentDidMount() {
+    this.getData();
+  }
+
   render() {
     return (<div>
       <h1>Github Fetcher</h1>
       <RepoList repos={this.state.repos} />
-      <Search onSearch={this.search.bind(this)} />
+      <Search onSearch={this.search.bind(this)} message={this.state.message} />
     </div>)
   }
 }

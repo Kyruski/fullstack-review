@@ -23,6 +23,7 @@ class Search extends React.Component {
       <h4>Add more repos!</h4>
       Enter a github username: <input value={this.state.terms} onChange={this.onChange.bind(this)} />
       <button onClick={this.search.bind(this)}> Add Repos </button>
+      &nbsp; &nbsp; {this.props.message}
     </div>)
   }
 }
