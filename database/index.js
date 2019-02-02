@@ -35,9 +35,7 @@ let save = (model, id, callback) => {
 }
 
 let find = (model, conditions, fieldsToReturn, options, callback) => {
-  console.log('we here')
   model.find(conditions, fieldsToReturn, options, (err, data) => {
-    console.log('we here2')
     if (err) {
       callback(err);
     } else {

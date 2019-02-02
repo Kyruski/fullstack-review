@@ -16,7 +16,6 @@ module.exports = {
     db.find(db.Repo, null, null, {sort: {
       forks: -1
     }, limit: 25}, (err, results) => {
-      console.log('we got here', results);
       if (err) {
         callback(err);
       } else {

@@ -19,7 +19,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('hi');
     $.ajax({
       url: '/repos',
       type: 'GET',

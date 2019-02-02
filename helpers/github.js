@@ -7,7 +7,7 @@ const formatRepo = (item) => {
     repo: item.name,
     author: item.owner.login,
     author_avatar: item.owner.avatar_url,
-    url: item.html_url,
+    link: item.html_url,
     stars: item.stargazers_count,
     forks: item.forks_count
   };
