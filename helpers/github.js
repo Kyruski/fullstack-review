@@ -1,5 +1,6 @@
 const request = require('request');
 const config = require('../config.js');
+require('dotenv').config();
 
 const formatRepo = (item) => {
   const repoInfo = {
@@ -30,7 +31,7 @@ let getReposByUsername = (username, callback) => {
     headers: {
       'Accept': 'application/vnd.github.v3+json',
       'User-Agent': 'request',
-      'Authorization': `token ${config.TOKEN}`
+      'Authorization': `token ${process.env.TOKEN}`
     }
   };
 
