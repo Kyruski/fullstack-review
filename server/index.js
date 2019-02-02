@@ -3,7 +3,6 @@ let app = express();
 const bodyParser = require('body-parser');
 const github = require('../helpers/github.js');
 const model = require('./model.js');
-require('dotenv').config();
 
 const requestGithub = (user, res, callback) => {
   github.getReposByUsername(user, (err, data) => {
@@ -50,12 +49,6 @@ app.get('/repos', (req, res) => {
       res.json(result);
     }
   });
-});
-
-app.get('/repos', function (req, res) {
-
-  // TODO - your code here!
-  // This route should send back the top 25 repos
 });
 
 let port = process.env.PORT || 1128;

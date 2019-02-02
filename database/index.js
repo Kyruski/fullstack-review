@@ -47,19 +47,4 @@ let find = (model, conditions, fieldsToReturn, options, callback) => {
 module.exports = {db: db,
   save: save, 
   find: find, 
-  // User: User, 
   Repo: Repo }
-
-
-  /*News.find({
-    deal_id:deal._id // Search Filters
-},
-['type','date_added'], // Columns to Return NEEDS TO BE OBJ OR STRING, can do 'field1 field2' or
-{
-    skip:0, // Starting Row
-    limit:10, // Ending Row
-    sort:{
-        date_added: -1 //Sort by Date Added DESC
-    }
-},
-callback)*/
