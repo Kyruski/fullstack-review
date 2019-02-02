@@ -4,23 +4,12 @@ const bodyParser = require('body-parser');
 const github = require('../helpers/github.js');
 const model = require('./model.js');
 
-// const checkUserInDB = (user, callback) => {
-//   model.checkUser(user, (err, data) => {
-//     if (err) {
-//       console.log('err checking user in db in server', err);
-//       callback(err);
-//     } else {
-
-//     }
-//   })
-// };
-
 const requestGithub = (user, callback) => {
   github.getReposByUsername(user, (err, data) => {
+    console.log('this is data', data);
     if (err) {
       res.send('error getting repos ' + err);
     } else {
-      console.log('success getting data');
       const insertCallback = (err, response, repoArray) => {
         let newData = repoArray.slice(1);
         if (err) {
@@ -28,7 +17,6 @@ const requestGithub = (user, callback) => {
         } else if (newData.length > 0) {
           model.insertRepo(newData, (err, resp) => {insertCallback(err, resp, newData)});
         } else {
-          console.log('insertion successful');
           callback(null, response);
         }
       };
@@ -36,7 +24,6 @@ const requestGithub = (user, callback) => {
         insertCallback(err, response, data);
       });
     }
-    
   });
 };
 
@@ -52,13 +39,16 @@ app.post('/repos', function (req, res) {
       res.send('Success');
     }
   });
+});
 
-
-
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
+app.get('/repos', (req, res) => {
+  model.getTop25((err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(result);
+    }
+  });
 });
 
 app.get('/repos', function (req, res) {

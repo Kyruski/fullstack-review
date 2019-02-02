@@ -5,14 +5,8 @@ const db = mongoose.createConnection('mongodb://localhost/fetcher', {
   useMongoClient: true
 });
 
-// let userSchema = mongoose.Schema({
-//   name: String
-// })
-
-// let User = mongoose.model('User', userSchema);
-
 let repoSchema = mongoose.Schema(
-  { //need new?
+  {
     _id: Number,
     repo: String,
     author: String,
@@ -22,7 +16,7 @@ let repoSchema = mongoose.Schema(
     forks: Number
 });
 
-let Repo = mongoose.model('Repo', repoSchema); //need new?
+let Repo = mongoose.model('Repo', repoSchema);
 
 let save = (model, id, callback) => {
   Repo.findOneAndUpdate(
@@ -34,7 +28,6 @@ let save = (model, id, callback) => {
         console.log('err saving Repo', err);
         callback(err);
       } else {
-        console.log('successfully saved repo');
         callback(null, response);
       }
     }
@@ -42,8 +35,16 @@ let save = (model, id, callback) => {
 }
 
 let find = (model, conditions, fieldsToReturn, options, callback) => {
-  model.find(conditions, fieldsToReturn, options, callback);
-}
+  console.log('we here')
+  model.find(conditions, fieldsToReturn, options, (err, data) => {
+    console.log('we here2')
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
 
 module.exports = {db: db,
   save: save, 
