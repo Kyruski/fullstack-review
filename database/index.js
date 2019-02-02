@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
+require('dotenv').config();
 
-const db = mongoose.createConnection('mongodb://localhost/fetcher', {
+const connectURL = process.env.DB_URI || 'mongodb://localhost/fetcher';
+mongoose.connect(connectURL);
+
+const db = mongoose.createConnection(connectURL, {
   useMongoClient: true
 });
 
