@@ -20,13 +20,3 @@ const RepoListEntry = ({ repo, index }) => (
 )
 
 export default RepoListEntry;
-
-// {
-//   _id: item.id,
-//   repo: item.name,
-//   author: item.owner.login,
-//   author_avatar: item.owner.avatar_url,
-//   url: item.html_url,
-//   stars: item.stargazers_count,
-//   forks: item.forks_count
-// };
