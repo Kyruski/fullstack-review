@@ -3,6 +3,7 @@ let app = express();
 const bodyParser = require('body-parser');
 const github = require('../helpers/github.js');
 const model = require('./model.js');
+require('dotenv').config();
 
 const requestGithub = (user, res, callback) => {
   github.getReposByUsername(user, (err, data) => {
