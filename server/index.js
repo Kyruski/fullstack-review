@@ -30,6 +30,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
 app.post('/repos', function (req, res) {
+  console.log(req.body);
   const username = req.body.username;
   requestGithub(username, (err, response) => {
     if (err) {
