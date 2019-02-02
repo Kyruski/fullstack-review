@@ -6,7 +6,6 @@ const model = require('./model.js');
 
 const requestGithub = (user, callback) => {
   github.getReposByUsername(user, (err, data) => {
-    console.log('this is data', data);
     if (err) {
       res.send('error getting repos ' + err);
     } else {
