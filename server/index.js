@@ -31,7 +31,6 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
 app.post('/repos', function (req, res) {
-  console.log(req.body);
   const username = req.body.username;
   requestGithub(username, res, (err, response) => {
     if (err) {
@@ -43,7 +42,9 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', (req, res) => {
-  model.getTop25((err, result) => {
+  let body = req.query.payload;
+  console.log('body', body);
+  model.getTop25(body, (err, result) => {
     if (err) {
       res.send(err);
     } else {

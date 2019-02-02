@@ -12,10 +12,11 @@ module.exports = {
     });
   },
 
-  getTop25: (callback) => {
-    db.find(db.Repo, null, null, {sort: {
-      forks: -1
-    }, limit: 25}, (err, results) => {
+  getTop25: (body, callback) => {
+    let params = {sort: {}, limit: 25};
+    params.sort[body] = -1;
+    console.log(params);
+    db.find(db.Repo, null, null, params, (err, results) => {
       if (err) {
         callback(err);
       } else {
